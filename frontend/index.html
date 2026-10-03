@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PayOpti | Payment Optimization</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         AUTHENTICATION SCREEN
+         ===================================================== -->
+
+    <div id="authScreen" class="auth-screen">
+
+        <div class="auth-card">
+
+            <div class="auth-brand">
+                <div class="auth-brand-logo">P</div>
+
+                <div>
+                    <h1>PayOpti</h1>
+                    <p>Smart Accounts Payable</p>
+                </div>
+            </div>
+
+
+            <!-- ================= LOGIN ================= -->
+
+            <div id="loginBox">
+
+                <div class="auth-heading">
+                    <h2>Welcome Back</h2>
+                    <p>Login to continue to PayOpti</p>
+                </div>
+
+                <form id="loginForm" class="auth-form">
+
+                    <label>Email</label>
+
+                    <input
+                        id="loginEmail"
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                    <label>Password</label>
+
+                    <div class="password-field">
+
+                        <input
+                            id="loginPassword"
+                            type="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            onclick="toggleAuthPassword('loginPassword', this)"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                    >
+                        Login
+                    </button>
+
+                    <div
+                        id="loginMessage"
+                        class="auth-message"
+                    ></div>
+
+                </form>
+
+
+                <div class="auth-switch">
+
+                    Don't have an account?
+
+                    <button
+                        type="button"
+                        onclick="showSignup()"
+                    >
+                        Sign Up
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SIGN UP ================= -->
+
+            <div
+                id="signupBox"
+                style="display:none;"
+            >
+
+                <div class="auth-heading">
+                    <h2>Create Account</h2>
+                    <p>Create your PayOpti finance account</p>
+                </div>
+
+
+                <form
+                    id="signupForm"
+                    class="auth-form"
+                >
+
+                    <label>Full Name</label>
+
+                    <input
+                        id="signupName"
+                        type="text"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+
+                    <label>Email</label>
+
+                    <input
+                        id="signupEmail"
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+
+                    <label>Password</label>
+
+                    <div class="password-field">
+
+                        <input
+                            id="signupPassword"
+                            type="password"
+                            placeholder="Create a password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            onclick="toggleAuthPassword('signupPassword', this)"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+
+                    <label>Confirm Password</label>
+
+                    <div class="password-field">
+
+                        <input
+                            id="signupConfirmPassword"
+                            type="password"
+                            placeholder="Confirm your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            onclick="toggleAuthPassword('signupConfirmPassword', this)"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                    >
+                        Create Account
+                    </button>
+
+
+                    <div
+                        id="signupMessage"
+                        class="auth-message"
+                    ></div>
+
+                </form>
+
+
+                <div class="auth-switch">
+
+                    Already have an account?
+
+                    <button
+                        type="button"
+                        onclick="showLogin()"
+                    >
+                        Login
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                P
+            </div>
+
+            <div>
+                <h2>PayOpti</h2>
+
+                <p>
+                    Smart Payment Optimization
+                </p>
+            </div>
+
+        </div>
+
+
+        <nav class="nav">
+
+            <button
+                class="nav-item active"
+                onclick="showSection('dashboard', this)"
+            >
+                <span>▣</span>
+                Dashboard
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('payables', this)"
+            >
+                <span>₹</span>
+                Payables
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('scenarios', this)"
+            >
+                <span>◈</span>
+                Scenarios
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('cash', this)"
+            >
+                <span>▤</span>
+                Cash Projection
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('settings', this)"
+            >
+                <span>⚙</span>
+                Settings
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-info">
+
+                <strong>PayOpti</strong>
+
+                <span>
+                    Accounts Payable
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="main">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+                <p id="pageSubtitle">
+                    Smart accounts payable optimization
+                </p>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <button
+                    class="refresh-btn"
+                    onclick="loadDashboard()"
+                >
+                    ↻ Refresh
+                </button>
+
+
+                <div class="profile">
+
+                    <div
+                        class="avatar"
+                        id="loggedUserAvatar"
+                    >
+                        F
+                    </div>
+
+
+                    <div>
+
+                        <strong id="loggedUserName">
+                            Finance User
+                        </strong>
+
+                        <span id="loggedUserRole">
+                            Finance User
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="logout-btn"
+                        type="button"
+                        onclick="logout()"
+                    >
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD
+             ================================================= -->
+
+        <section
+            id="dashboard"
+            class="section active-section"
+        >
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Payment Optimization Dashboard</h1>
+
+                    <p>
+                        Optimize supplier payments while protecting cash.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- KPI -->
+
+            <div class="kpi-grid">
+
+                <div class="kpi-card">
+
+                    <div class="kpi-icon blue">
+                        ₹
+                    </div>
+
+                    <div>
+                        <span>Available Cash</span>
+
+                        <strong id="availableCash">
+                            ₹0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+                        <span>Total Savings</span>
+
+                        <strong id="totalSavings">
+                            ₹0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-icon orange">
+                        !
+                    </div>
+
+                    <div>
+                        <span>Penalty Cost</span>
+
+                        <strong id="totalPenalty">
+                            ₹0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-icon purple">
+                        ₹
+                    </div>
+
+                    <div>
+                        <span>Projected Ending Cash</span>
+
+                        <strong id="endingCash">
+                            ₹0
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD GRID -->
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Cash Projection</h2>
+
+                            <p>
+                                Projected cash after scheduled payments
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container">
+
+                        <canvas id="cashChart"></canvas>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Payment Summary</h2>
+
+                            <p>
+                                Current optimization results
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-list">
+
+                        <div class="summary-row">
+
+                            <span>Invoices</span>
+
+                            <strong id="invoiceCount">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>Planned Payments</span>
+
+                            <strong id="plannedPayments">
+                                ₹0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>Early Payments</span>
+
+                            <strong id="earlyPayments">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>Due Date Payments</span>
+
+                            <strong id="duePayments">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>Deferred Payments</span>
+
+                            <strong id="deferredPayments">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECOMMENDATIONS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Smart Recommendations</h2>
+
+                        <p>
+                            Cash-aware payment decisions
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="dashboardRecommendations"
+                    class="recommendations"
+                >
+
+                    <div class="empty-state">
+                        Loading recommendations...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAYABLES
+             ================================================= -->
+
+        <section
+            id="payables"
+            class="section"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>Payables</h1>
+
+                    <p>
+                        View outstanding purchase bills from Nova.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="payables-toolbar">
+
+                    <input
+                        id="payablesSearch"
+                        type="text"
+                        placeholder="Search vendor or bill..."
+                        oninput="filterPayables()"
+                    >
+
+
+                    <button
+                        class="primary-btn"
+                        onclick="loadPayables()"
+                    >
+                        ↻ Load Bills
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Bill</th>
+                                <th>Vendor</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="payablesTable">
+
+                            <tr>
+                                <td colspan="5">
+                                    Loading...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SCENARIOS
+             ================================================= -->
+
+        <section
+            id="scenarios"
+            class="section"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>Payment Scenarios</h1>
+
+                    <p>
+                        Compare early, due-date and late payment options.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="scenarioCards"
+                class="scenario-cards"
+            >
+
+                <div class="empty-state">
+                    Loading scenarios...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CASH
+             ================================================= -->
+
+        <section
+            id="cash"
+            class="section"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>Cash Projection</h1>
+
+                    <p>
+                        Understand future cash position.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="chart-container large-chart">
+
+                    <canvas id="cashProjectionChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="cashProjectionSummary"
+                class="kpi-grid"
+            ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             SETTINGS
+             ================================================= -->
+
+        <section
+            id="settings"
+            class="section"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>Payment Terms</h1>
+
+                    <p>
+                        Configure vendor discounts and late payment penalties.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="settings-form">
+
+                    <div class="form-group">
+
+                        <label>
+                            Vendor
+                        </label>
+
+                        <select id="termVendorId">
+
+                            <option value="">
+                                Select Vendor
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Early Discount %
+                        </label>
+
+                        <input
+                            id="earlyDiscount"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="2"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Early Payment Days
+                        </label>
+
+                        <input
+                            id="earlyDays"
+                            type="number"
+                            min="0"
+                            placeholder="10"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Late Penalty %
+                        </label>
+
+                        <input
+                            id="latePenalty"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="2"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Late Payment Days
+                        </label>
+
+                        <input
+                            id="lateDays"
+                            type="number"
+                            min="0"
+                            placeholder="10"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="savePaymentTerms()"
+                >
+                    Save Payment Terms
+                </button>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>Configured Vendor Terms</h2>
+
+                        <p>
+                            Existing payment optimization rules.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Vendor</th>
+                                <th>Early Discount</th>
+                                <th>Early Days</th>
+                                <th>Late Penalty</th>
+                                <th>Late Days</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="paymentTermsTable">
+
+                            <tr>
+                                <td colspan="5">
+                                    Loading...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <p>
+                PayOpti — Smart Accounts Payable Cash Optimization
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
